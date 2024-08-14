@@ -9,19 +9,9 @@ editionCollumn   = booksSpreadsheet['EDIÇÃO'].tolist()
 yearCollumn      = booksSpreadsheet['ANO DE PUBLICAÇÃO'].tolist()
 publisherCollumn = booksSpreadsheet['EDITORA'].tolist()
 quantitCollumn   = booksSpreadsheet['QUANT.'].tolist()
-
 # O "x".tolist() retorna uma lista float (???)
 
 cont = 0
-
-# for i in range(0,20):
-#     print(f"Working{"."*cont}")
-#     cont += 1
-#     time.sleep(0.2)
-#     os.system('cls')
-#     if cont == 4:
-#         cont = 0
-
 for i in titlesCollumn:
     # Condicional feita para dividir as seções: "PNLD LITERÁRIO 2021/2023 - ACERVO x"
     if str(quantitCollumn[cont]) == "nan":
