@@ -1,11 +1,5 @@
 import os, time, pandas as pd, psycopg2
 
-# Integração ao PostGreeSQL
-conn = psycopg2.connect(database="    ", 
-                        user="    ", 
-                        password="    ")
-curr = conn.cursor()
-
 # Integração à planilha
 booksSpreadsheet = pd.read_excel(r"sistemaBiblioteca-EEEP-AN\Excel-Reader\ACERVO BIBLIOGRÁFICO - CATALOGADO EM 2023.xlsx", header = 0)
 titlesCollumn    = booksSpreadsheet['TITULO DO LIVRO'].tolist()
