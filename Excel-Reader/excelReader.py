@@ -1,5 +1,12 @@
-import os, time, pandas as pd
+import os, time, pandas as pd, psycopg2
 
+# Integração ao PostGreeSQL
+conn = psycopg2.connect(database="    ", 
+                        user="    ", 
+                        password="    ")
+curr = conn.cursor()
+
+# Integração à planilha
 booksSpreadsheet = pd.read_excel(r"sistemaBiblioteca-EEEP-AN\Excel-Reader\ACERVO BIBLIOGRÁFICO - CATALOGADO EM 2023.xlsx", header = 0)
 titlesCollumn    = booksSpreadsheet['TITULO DO LIVRO'].tolist()
 authorsCollumn   = booksSpreadsheet['AUTOR'].tolist()
@@ -9,7 +16,7 @@ yearCollumn      = booksSpreadsheet['ANO DE PUBLICAÇÃO'].tolist()
 publisherCollumn = booksSpreadsheet['EDITORA'].tolist()
 quantitCollumn   = booksSpreadsheet['QUANT.'].tolist()
 
-# O "x".tolist() retorna uma lista float (???) 
+# O "x".tolist() retorna uma lista float (???)
 
 cont = 0
 
@@ -31,7 +38,7 @@ for i in titlesCollumn:
     else: 
         # Condicional feita para verificar se há informações faltando
         if str(authorsCollumn[cont]) == 'nan' or str(categoryCollumn[cont]) == 'nan' or str(editionCollumn[cont]) == 'nan' or str(yearCollumn[cont]) == 'nan' or str(publisherCollumn[cont]) == 'nan' or str(quantitCollumn[cont]) == 'nan':
-        # Tive que converter em string pra poder fazer a comparação como NaN
+            # Tive que converter em string pra poder fazer a comparação como NaN
             print(f'{'='*100}\n{'='*100}\n{'='*100} \n{' '*20}ERRO EM {titlesCollumn[cont]} \n{'='*100}\n{'='*100}\n{'='*100} \n')
             break
         else:
