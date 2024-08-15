@@ -13,7 +13,7 @@ def tableCreate(nameTable):
                 Author    varchar(80), 
                 Category  varchar(80),
                 Edition   varchar(80),
-                Year      int,
+                PublishYear       int,
                 Publisher varchar(80),
-                Quantity  varchar(80),)
+                Quantity          int)
     ''', (nameTable))
