@@ -1,0 +1,7 @@
+Planilha - > PostGreeSQL: 
+
+Ler - > Validar - > Ok - > Adicionar ao banco de dados - > Validar - > Ok - > print êxito. 
+
+Ler - > Validar - > Ok - > Adicionar ao banco de dados - > Validar - > Erro - > print erro - > Armazenar erro. 
+
+Ler - > Validar - > Erro - > print erro - > Armazenar erro
