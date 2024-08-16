@@ -12,9 +12,11 @@ quantitCollumn   = booksSpreadsheet['QUANT.'].tolist()
 # O "x".tolist() retorna uma lista float (???)
 
 # Conexão ao PostGreeSQL
-conn = psycopg2.connect(database="    ", 
-                        user="    ", 
-                        password="    ")
+conn = psycopg2.connect(dbname   = "    ", 
+                        user     = "    ", 
+                        password = "    ",
+                        host     = "    ",
+                        port     = "5432")
 curr = conn.cursor()
 
 #Inicializando a lista que vai armazenar os erros
@@ -25,7 +27,7 @@ rdErros  = [ ]
 nameTable = str(input("Digite o nome da tabela a ser inserido"))
 
 # Iniciando as variáveis que vão ser manipuladas no looping
-cont = 0
+cont   = 0
 acervo = ""
 for i in titlesCollumn:
     if str(quantitCollumn[cont]) == 'nan':
@@ -93,3 +95,7 @@ for i in titlesCollumn:
             pass
     cont += 1
     time.sleep(0.5)
+
+curr.close()
+conn.commit()
+conn.close()
