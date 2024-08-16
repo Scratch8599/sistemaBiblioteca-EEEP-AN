@@ -7,3 +7,6 @@ Ler - > Validar - > Ok - > Adicionar ao banco de dados - > Validar - > Erro - > 
 Ler - > Validar - > Erro - > print erro - > Armazenar erro
 
 * Adicionar o Acervo como coluna no BD *
+
+teste:
+https://www.mycompiler.io/view/FVu4UhfRn2P
