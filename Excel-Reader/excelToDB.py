@@ -8,7 +8,8 @@ def creatingTable(nameTable):
     curr = conn.cursor()
 
     curr.execute('''
-    CREATE TABLE if not exists %s(ID integer PRIMARY KEY, 
+    CREATE TABLE if not exists %s(ID integer PRIMARY KEY,
+                Acervo    varchar(80),
                 Book      varchar(80), 
                 Author    varchar(80), 
                 Category  varchar(80),
