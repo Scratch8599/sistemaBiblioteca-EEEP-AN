@@ -5,3 +5,5 @@ Ler - > Validar - > Ok - > Adicionar ao banco de dados - > Validar - > Ok - > pr
 Ler - > Validar - > Ok - > Adicionar ao banco de dados - > Validar - > Erro - > print erro - > Armazenar erro. 
 
 Ler - > Validar - > Erro - > print erro - > Armazenar erro
+
+* Adicionar o Acervo como coluna no BD *
