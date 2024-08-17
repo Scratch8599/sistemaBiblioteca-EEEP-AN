@@ -12,10 +12,10 @@ quantitCollumn   = booksSpreadsheet['QUANT.'].tolist()
 # O "x".tolist() retorna uma lista float (???)
 
 # Conexão ao PostGreeSQL
-conn = psycopg2.connect(dbname   = "    ", 
-                        user     = "    ", 
-                        password = "    ",
-                        host     = "    ",
+conn = psycopg2.connect(dbname   = "Teste", 
+                        user     = "postgres", 
+                        password = "1969",
+                        host     = "localhost",
                         port     = "5432")
 curr = conn.cursor()
 
