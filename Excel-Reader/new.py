@@ -8,7 +8,6 @@ editionCollumn   = booksSpreadsheet['EDIÇÃO'].tolist()
 yearCollumn      = booksSpreadsheet['ANO DE PUBLICAÇÃO'].tolist()
 publisherCollumn = booksSpreadsheet['EDITORA'].tolist()
 quantitCollumn   = booksSpreadsheet['QUANT.'].tolist()
-
 # O "x".tolist() retorna uma lista float (???)
 
 # Conexão ao PostGreeSQL
@@ -39,14 +38,14 @@ rdErros  = [ ]
 # Iniciando as variáveis que vão ser manipuladas no looping
 cont   = 0
 acervo = ""
-for i in range(0,100):
+for i in titlesCollumn:
     if str(quantitCollumn[cont]) == 'nan':
         # Checando se a linha lida é de "Acervo", se é, está armazenando para adicionar no banco de dados
         acervo = str(titlesCollumn[cont])
         
     else:
         if str(authorsCollumn[cont]) != 'nan' or str(categoryCollumn[cont]) != 'nan' or str(editionCollumn[cont]) != 'nan' or str(yearCollumn[cont]) != 'nan' or str(publisherCollumn[cont]) != 'nan' or str(quantitCollumn[cont]) != 'nan':
-            print(f"Livro: {cont}")
+            print(f"Tentando adicionar {titlesCollumn[cont]} ao Bando de dados")
             #Checando se há todas as informações, se há, está adicionando e validando no banco de dados
             curr.execute('''
             INSERT INTO Livros (ID, Acervo, Book, Author, Category, Edition, PublishYear, Publisher, Quantity) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -57,49 +56,26 @@ for i in range(0,100):
             SELECT * FROM Livros WHERE Book = %s
             ''', (str(titlesCollumn[cont]),))
             validation = curr.fetchone()
-            if acervo != str(validation[1]):
-                print(f"Erro em {acervo}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            if str(titlesCollumn[cont]) != str(validation[2]):
-                print(f"Erro em {titlesCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif str(authorsCollumn[cont]) != str(validation[3]):
-                print(f"Erro em {authorsCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif str(categoryCollumn[cont]) != str(validation[4]):
-                print(f"Erro em {categoryCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif str(editionCollumn[cont]) != str(validation[5]):
-                print(f"Erro em {editionCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif str(yearCollumn[cont]) != str(validation[6]):
-                print(f"Erro em {yearCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif str(publisherCollumn[cont]) != str(validation[7]):
-                print(f"Erro em {publisherCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
-            elif quantitCollumn[cont] != validation[8]:
-                print(f"Erro em {quantitCollumn[cont]}")
-                dbErrors.append(f"Erro em {titlesCollumn[cont]}")
-                pass
+            checkValidation = [ None, acervo, titlesCollumn[cont], authorsCollumn[cont], categoryCollumn[cont], editionCollumn[cont], yearCollumn[cont], publisherCollumn[cont], quantitCollumn[cont] ]
+            for i in range(1,8):
+                if str(checkValidation[i]) != str(validation[i]):
+                    print(f"Erro em {titlesCollumn[cont]}")
+                    dbErrors.append(f"Erro em {titlesCollumn[cont]}")
             pass
         elif str(authorsCollumn[cont]) == 'nan' or str(categoryCollumn[cont]) == 'nan' or str(editionCollumn[cont]) == 'nan' or str(yearCollumn[cont]) == 'nan' or str(publisherCollumn[cont]) == 'nan' or str(quantitCollumn[cont]) == 'nan':
             print(f'Ocorreu um erro em {titlesCollumn[cont]}')
             rdErros.append(f"Erro em {titlesCollumn[cont]}")
             pass
     cont += 1
+    if cont%50 == 0:
+        os.system('cls')
     time.sleep(0.25)
 
 print(f'{dbErrors}\n{rdErros}')
-time.sleep(len(dbErrors))
-
+if len(dbErrors) > len(rdErros):
+    time.sleep(len(dbErrors))
+else:
+    time.sleep(len(rdErros))
 
 curr.close()
 conn.commit()
