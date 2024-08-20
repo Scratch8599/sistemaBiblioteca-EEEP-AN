@@ -26,7 +26,8 @@ else:
 erros = [ ]
 acervo = " "
 cont = 0
-for i in titlesCollumn:
+# for i in titlesCollumn:
+for i in range(0,50):
     if str(titlesCollumn[cont]) != 'nan' and (str(authorsCollumn[cont]) == 'nan' and str(categoryCollumn[cont]) == 'nan' and str(editionCollumn[cont]) == 'nan' and str(yearCollumn[cont]) == 'nan' and str(publisherCollumn[cont]) == 'nan' and str(quantitCollumn[cont]) == 'nan'):
         acervo = titlesCollumn[cont]
         print(f'Adicionando: {titlesCollumn[cont]}')
@@ -47,17 +48,23 @@ for i in titlesCollumn:
                     erros.append(f'Erro em: {titlesCollumn[cont]}')
                     break
         if vTool != 'Erro':
-            print('Ok')
-            curr.execute("INSERT INTO Books(Acervo, Book, Author, Category, Edition, PublishYear, Publisher, Quantity, ID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s, %s)", (str(acervo), str(titlesCollumn[cont]), str(authorsCollumn[cont]), str(categoryCollumn[cont]), str(editionCollumn[cont]), int(round(yearCollumn[cont])), str(publisherCollumn[cont]), int(round(quantitCollumn[cont])), IDk, ))
-    time.sleep(0.2)
-    cont += 1
-    IDk += 1
+            curr.execute("SELECT Book FROM Books")
+            bookVTool = curr.fetchone()
+            for i in bookVTool:
+                print(i)
+#             if str(bookVTool[0]) == str(titlesCollumn[cont]):
+#                 curr.execute("SELECT Quantity FROM Books ")
+#             print('Ok')
+#             curr.execute("INSERT INTO Books(Acervo, Book, Author, Category, Edition, PublishYear, Publisher, Quantity, ID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s, %s)", (str(acervo), str(titlesCollumn[cont]), str(authorsCollumn[cont]), str(categoryCollumn[cont]), str(editionCollumn[cont]), int(round(yearCollumn[cont])), str(publisherCollumn[cont]), int(round(quantitCollumn[cont])), IDk, ))
+#     time.sleep(0.2)
+#     cont += 1
+#     IDk += 1
 
-os.system('cls')
-for i in erros:
-    print(i)
-    time.sleep(0.5)
+# os.system('cls')
+# for i in erros:
+#     print(i)
+#     time.sleep(0.5)
 
-curr.close()
-conn.commit()
-conn.close()
+# curr.close()
+# conn.commit()
+# conn.close()
