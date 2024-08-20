@@ -1,4 +1,4 @@
-import pyautogui as auto
+import pyautogui as auto, time
 
 screenWidth, screenHeight = auto.size()
 print(screenWidth, screenHeight)
@@ -38,6 +38,7 @@ def registerUser(userName,userEmail,userGender,userCPF,userID,userYear):
         auto.write(f'ALUNA {userYear} MATRICULA: {userID}')
     elif userGender == "F":
         auto.write(f'ALUNA {userYear} MATRICULA: {userID}')
+    time.sleep(4)
     switchWindow()
     validating = input("As informações estão corretas?\nUse 's' para SIM e 'n' para NÃO\n")
     switchWindow()
