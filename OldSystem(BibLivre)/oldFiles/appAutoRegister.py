@@ -22,7 +22,7 @@ def closeTab():
     auto.press('w')
     auto.keyUp('ctrlleft')
 
-def copyInfo():
+def copyInfo(): 
     auto.keyDown('ctrlleft')
     auto.press('c')
     auto.keyUp('ctrlleft')
@@ -55,8 +55,10 @@ def getUserInfo():
     auto.dragTo(602,514, 1.05, button="left")
     copyInfo()
     switchWindow()
-    auto.click(368,996)
+    auto.click(368,996, 2)
+    print(pasteInfo())
     userName = input()
+    auto.write(pasteInfo())
     pasteInfo()
     switchTab()
     getEmail()
