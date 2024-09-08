@@ -14,14 +14,7 @@ emailUser           = studentsSpreadsheet['Email'].tolist()
 genderUser          = studentsSpreadsheet['Genero'].tolist()
 # O "x".tolist() retorna uma lista float (???)
 
-yearRegister = input('Insira o ano de registro')
-
-def readingExcelFile():
-    cont = 0
-    for i in nameUser: 
-        print(f"Matrícula: {registrationUser[cont]} \nAluno(a): {nameUser[cont]} \nCPF: {cpfUser[cont]} \nEmail: {emailUser[cont]} \nGênero: {genderUser[cont]} {"\n"*2}")
-        cont += 1
-        time.sleep(0.25)
+yearRegister = input('Insira o ano de registro:\n')
 
 options = webdriver.EdgeOptions()
 options.add_experimental_option("detach", True)
