@@ -1,33 +1,31 @@
-import time, os, pyautogui as auto
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+import time
 
-userName   = input()
-userEmail  = input()
-userGender = input()
-userCPF    = input()
-userYear   = input()
-userID     = input()
+options = webdriver.EdgeOptions()
 
-auto.hotkey('alt', 'tab')
-auto.scroll(1000)
-auto.click(1275,469)
-auto.click(840,718)
-auto.write(userName)
-auto.click(874,764)
-auto.click(871,803)
-auto.scroll(-1000)
-auto.click(868,471)
-auto.write(userEmail)
-auto.click(898,494)
-if userGender == "M" or 'm':
-    auto.click(895,532)
-elif userGender == "F" or "f":
-    auto.click(891,549)
-auto.click(881,646)
-auto.write(userCPF)
-auto.click(856,851)
-if userGender == "M" or 'm':
-    auto.write(f'Aluno do ano: {userYear}; Matrícula: ')
-elif userGender == "F" or "f":
-    auto.write(f'Aluna do ano: {userYear}; Matrícula: ')
+options.add_experimental_option("detach", True)
 
-auto.mouseInfo()
+driver = webdriver.Edge(options=options)
+driver.get('http://localhost/Biblivre5/')
+userNameLogin = driver.find_element(By.XPATH, '/html/body/form/div[1]/div[6]/ul/li[5]/input[1]')
+passWordLogin = driver.find_element(By.XPATH, '/html/body/form/div[1]/div[6]/ul/li[5]/input[2]')
+userNameLogin.clear()
+passWordLogin.clear()
+userNameLogin.send_keys('admin')
+passWordLogin.send_keys('abracadabra')
+driver.find_element(By.XPATH, '/html/body/form/div[1]/div[6]/ul/li[4]/button').click()
+
+
+menu_trigger = driver.find_element(By.XPATH, '/html/body/form/div[1]/div[6]/ul/li[2]')
+cursor = ActionChains(driver)
+cursor.move_to_element(menu_trigger).perform()
+popup_option = driver.find_element(By.XPATH, '/html/body/form/div[1]/div[6]/ul/li[2]/ul/li[1]').click()
+
+driver.find_element(By.XPATH, '/html/body/form/div[3]/div[1]/div[2]/div[3]/div[1]/div[4]/a').click()
+
+time.sleep(99999999)
+# driver.quit()
